@@ -1,4 +1,4 @@
-// Padded and checksummed version of: /home/kirill/Projects/Pico/test/pico2/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin
+// Padded and checksummed version of: D:/Program/Pico/pico_eurobot_2024/pico2/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin
 
 .cpu cortex-m0plus
 .thumb

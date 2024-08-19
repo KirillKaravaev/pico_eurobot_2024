@@ -65,7 +65,7 @@ void IMU::imu_init(){
     /* --- alternatively you can try this (6 loops should be enough) --- */
 
 
-
+    //Калибруем датчик при включении, тем самым задавая стационарную систему координат, относительно которой будет измеряться угол
     mpu.CalibrateAccel(6);
     mpu.CalibrateGyro(6);	
 	

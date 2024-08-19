@@ -21,20 +21,6 @@ void impulse_counter_callback(uint gpio, uint32_t event)
     if(gpio == IMP_CNT_PIN4) current_imp_num.imp_num4++;
 }
 
-// void impulse_counter2_callback(uint gpio, uint32_t event)
-// {
-//     current_imp_num.imp_num2++;
-// }
-
-// void impulse_counter3_callback(uint gpio, uint32_t event)
-// {
-//     current_imp_num.imp_num3++;
-// }
-
-// void impulse_counter4_callback(uint gpio, uint32_t event)
-// {
-//     current_imp_num.imp_num4++;
-// }
 
 bool repeating_timer_callback(struct repeating_timer *t)
 {
@@ -79,37 +65,3 @@ void impulse_counter_init()
     // cur_rpm.rpm4 = 0;
 }
 
-/// \end::timer_example[]
-
-/*
- 2 * Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
- 3 *
- 4 * SPDX-License-Identifier: BSD-3-Clause
- 5 */
-/*
-7 #include <stdio.h>
-8 #include "pico/stdlib.h"
-9 #include "hardware/gpio.h"
-10
-11 static char event_str[128];
-12
-13 void gpio_event_string(char *buf, uint32_t events);
-14
-15 void gpio_callback(uint gpio, uint32_t events) {
-16 // Put the GPIO event(s) that just happened into event_str
-17 // so we can print it
-18 gpio_event_string(event_str, events);
-19 printf("GPIO %d %s\n", gpio, event_str);
-20 }
-21
-22 int main() {
-23 stdio_init_all();
-24
-25 printf("Hello GPIO IRQ\n");
-26 gpio_set_irq_enabled_with_callback(2, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true,
- &gpio_callback);
-27
-28 // Wait forever
-29 while (1);
-30 }
-*/

@@ -1,8 +1,8 @@
-# Install script for directory: /home/kirill/Projects/Pico/test/pico2/external_lib
+# Install script for directory: D:/Program/Pico/pico_eurobot_2024/pico2/external_lib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/usr/local")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/pico2")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,14 +34,14 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/usr/bin/arm-none-eabi-objdump")
+  set(CMAKE_OBJDUMP "C:/Program Files/Raspberry Pi/Pico SDK v1.5.1/gcc-arm-none-eabi/bin/arm-none-eabi-objdump.exe")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/kirill/Projects/Pico/test/pico2/build/external_lib/pico_uart_transport/cmake_install.cmake")
-  include("/home/kirill/Projects/Pico/test/pico2/build/external_lib/stepper/cmake_install.cmake")
-  include("/home/kirill/Projects/Pico/test/pico2/build/external_lib/display/cmake_install.cmake")
+  include("D:/Program/Pico/pico_eurobot_2024/pico2/build/external_lib/pico_uart_transport/cmake_install.cmake")
+  include("D:/Program/Pico/pico_eurobot_2024/pico2/build/external_lib/stepper/cmake_install.cmake")
+  include("D:/Program/Pico/pico_eurobot_2024/pico2/build/external_lib/display/cmake_install.cmake")
 
 endif()
 

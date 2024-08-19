@@ -16,9 +16,11 @@ void stepper(int number, int direction, int angle ){
         else gpio_put(STEPPER_DIR_PIN_1, 0);
 
         //Устанавливаем заполнение импульса 50% на необходимое для проворота на определенный градус время, а далее выставляем заполнение в 0, вращение прекращается
-        pwm_set_gpio_level(STEPPER_PWM_PIN_1, 500);
-        sleep_ms((angle / (1.8 * STEPPER_SPEED)) * 1000);
-        pwm_set_gpio_level(STEPPER_PWM_PIN_1, 0);
+        pwm_set_gpio_level(STEPPER_PWM_PIN_1, 1000);
+        //Микрошаг мы не выбирали, поэтому один импульс шим соответствует обороту на 1.8 градусов. Тогда angle / 1.8 - количество оборотов,
+        //чтобы достичь угла angle, 1/STEPPER_SPEED - время одного импульса ШИМ (период, в сек), 1000 - для перевода секунд в миллисекунды 
+        sleep_ms((angle / (1.8 * STEPPER_SPEED)) * 1000); 
+        pwm_set_gpio_level(STEPPER_PWM_PIN_1, 0); //Выставляем заполнение в 0
         gpio_put(STEPPER_ENABLE_PIN_1, 1);  // Отключаем работу драйвера после окончания поворота (чтобы минимизировать нагрев драйвера)
 
     } else if ((number == 2) && gpio_get(STEPPER_OVERHEAT_PIN_3) && gpio_get(STEPPER_OVERHEAT_PIN_4)) {  // Вторая группа моторов должна оставаться включенной, чтобы обеспечивать удержание ромашки в поднятом состоянии
@@ -28,7 +30,7 @@ void stepper(int number, int direction, int angle ){
         }
         else gpio_put(STEPPER_DIR_PIN_2, 0);
 
-        pwm_set_gpio_level(STEPPER_PWM_PIN_2, 500);
+        pwm_set_gpio_level(STEPPER_PWM_PIN_2, 1000);
         sleep_ms((angle / (1.8 * STEPPER_SPEED)) * 1000);
         pwm_set_gpio_level(STEPPER_PWM_PIN_2, 0);
     }
@@ -69,15 +71,15 @@ void stepper_pwm_init(){
     uint slice_num1 = pwm_gpio_to_slice_num(STEPPER_PWM_PIN_1);
     uint slice_num2 = pwm_gpio_to_slice_num(STEPPER_PWM_PIN_2);
     
-    //Устанавливаем предделитель от тактовой частоты процессора (125[Мгц])
+    //Устанавливаем предделитель от тактовой частоты процессора (133[Мгц])
     pwm_set_clkdiv(slice_num1, STEPPER_PWM_DIV);
     pwm_set_clkdiv(slice_num2, STEPPER_PWM_DIV);
     
-    //Устанавливаем частоту ШИМА равной 125[Мгц]/STEPPER_PWM_DIV/PWM_WRAP
+    //Устанавливаем частоту ШИМА равной 133[Мгц]/STEPPER_PWM_DIV/PWM_WRAP
     pwm_set_wrap(slice_num1, STEPPER_PWM_WRAP);
     pwm_set_wrap(slice_num2, STEPPER_PWM_WRAP);
 
-    //Задаем начальное заполнение шим 50%
+    //Задаем начальное заполнение шим 0%
     pwm_set_gpio_level(STEPPER_PWM_PIN_1, 0);
     pwm_set_gpio_level(STEPPER_PWM_PIN_2, 0);
 

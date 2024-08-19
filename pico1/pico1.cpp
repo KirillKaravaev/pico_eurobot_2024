@@ -25,6 +25,7 @@ struct repeating_timer timer;
 
 const uint LED_PIN = 25;
 int cnt = 1;
+bool flag = true;
 
 rcl_publisher_t imu_publisher;
 sensor_msgs__msg__Imu imu_msg;
@@ -38,8 +39,8 @@ geometry_msgs__msg__Twist twist_msg;
 rcl_subscription_t servo_subscriber;
 geometry_msgs__msg__Vector3 servo_msg;
 
- IMU imu;
- IMU::data imu_dat;
+IMU imu;
+IMU::data imu_dat;
 
 Kinematics kinematics(
     Kinematics::LINO_BASE,
@@ -58,13 +59,8 @@ Kinematics kinematics(
 Kinematics::velocities cmd_vel;
 
 void blink() {
-    if (cnt == 1) {
-        gpio_put(LED_PIN, 1);
-        cnt = 0;
-    } else if (cnt == 0) {
-        gpio_put(LED_PIN, 0);
-        cnt = 1;
-    }
+    gpio_put(LED_PIN, flag);
+    flag = !flag;
 }
 
 void timer_callback(rcl_timer_t *timer, int64_t last_call_time) {
