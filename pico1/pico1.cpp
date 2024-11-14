@@ -125,7 +125,7 @@ int main() {
 
     motors_init();
     servo_init();
-    imu.imu_init();
+    imu.imu_init();   //При тестировании без IMU необходимо закомментировать эту строку, иначе не заработает.
     impulse_counter_init();
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
